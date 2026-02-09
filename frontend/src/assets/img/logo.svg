@@ -1,0 +1,30 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer circle with blur -->
+  <circle cx="100" cy="100" r="95" fill="url(#logoGradient)" opacity="0.15" filter="url(#glow)"/>
+  
+  <!-- Main circle -->
+  <circle cx="100" cy="100" r="85" fill="url(#logoGradient)" filter="url(#glow)"/>
+  
+  <!-- Inner accent -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  
+  <!-- GE initials -->
+  <text x="100" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" text-anchor="middle" fill="white" filter="url(#glow)">GE</text>
+  
+  <!-- Grow Exam text -->
+  <text x="100" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#14B8A6">GROW EXAM</text>
+</svg>

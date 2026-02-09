@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-gray-50">
+  @if (course) {
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img [src]="course.thumbnail || 'https://via.placeholder.com/1200x400'" 
+             [alt]="course.title" 
+             class="w-full h-64 object-cover">
+        
+        <div class="p-8">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <span class="bg-primary text-white px-3 py-1 rounded text-sm">{{ course.category }}</span>
+              <h1 class="text-4xl font-bold mt-4">{{ course.title }}</h1>
+              <p class="text-gray-600 mt-2">By {{ course.instructor }}</p>
+            </div>
+            @if (authService.isAuthenticated()) {
+              <button (click)="enroll()" [disabled]="enrolling"
+                      class="bg-secondary text-white px-6 py-3 rounded-lg hover:bg-green-600 disabled:opacity-50">
+                {{ enrolling ? 'Enrolling...' : 'Enroll Now' }}
+              </button>
+            }
+          </div>
+
+          <div class="flex gap-6 text-gray-600 mb-6">
+            <span>⏱️ {{ course.duration }}</span>
+            <span>📊 {{ course.level }}</span>
+            <span>👥 {{ course.enrollmentCount }} students</span>
+          </div>
+
+          <p class="text-gray-700 mb-8">{{ course.description }}</p>
+
+          <h2 class="text-2xl font-bold mb-4">Course Content</h2>
+          <div class="space-y-2">
+            @for (lesson of lessons; track lesson._id) {
+              <div class="border rounded p-4 hover:bg-gray-50">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="font-semibold">{{ lesson.order }}. {{ lesson.title }}</h3>
+                    <p class="text-sm text-gray-600">{{ lesson.description }}</p>
+                  </div>
+                  <span class="text-sm text-gray-500">{{ lesson.duration }} min</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

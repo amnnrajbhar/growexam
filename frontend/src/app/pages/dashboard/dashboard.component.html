@@ -1,0 +1,95 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">My Dashboard</h1>
+      <p class="text-gray-600">Track your learning progress and achievements</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-white/80 text-sm font-medium">Enrolled Courses</h3>
+          <span class="text-2xl">📚</span>
+        </div>
+        <p class="text-4xl font-bold">{{ enrollments.length }}</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-white/80 text-sm font-medium">Quizzes Taken</h3>
+          <span class="text-2xl">✅</span>
+        </div>
+        <p class="text-4xl font-bold">{{ results.length }}</p>
+      </div>
+      <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-white/80 text-sm font-medium">Average Score</h3>
+          <span class="text-2xl">🎯</span>
+        </div>
+        <p class="text-4xl font-bold">{{ averageScore }}%</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-6">My Courses</h2>
+      <div class="space-y-4">
+        @for (enrollment of enrollments; track enrollment._id) {
+          <div class="border border-gray-200 rounded-xl p-5 hover:border-primary transition">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-bold text-lg text-gray-900 mb-1">{{ enrollment.courseId.title }}</h3>
+                <p class="text-gray-600 text-sm mb-3">{{ enrollment.courseId.category }}</p>
+                <div class="mb-2">
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-600">Progress</span>
+                    <span class="font-semibold text-primary">{{ enrollment.progress }}%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-primary h-2 rounded-full transition-all" 
+                         [style.width.%]="enrollment.progress"></div>
+                  </div>
+                </div>
+              </div>
+              <a [routerLink]="['/courses', enrollment.courseId._id]" 
+                 class="ml-4 bg-primary text-white px-6 py-2.5 rounded-lg hover:bg-secondary transition font-medium">
+                Continue
+              </a>
+            </div>
+          </div>
+        } @empty {
+          <div class="text-center py-12">
+            <span class="text-6xl mb-4 block">📚</span>
+            <p class="text-gray-500 mb-4">No enrolled courses yet</p>
+            <a routerLink="/courses" class="text-primary hover:text-secondary font-semibold">Browse courses →</a>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm p-6">
+      <h2 class="text-2xl font-bold mb-6">Recent Quiz Results</h2>
+      <div class="space-y-4">
+        @for (result of results.slice(0, 5); track result._id) {
+          <div class="border border-gray-200 rounded-xl p-5">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="font-semibold text-gray-900">{{ result.quizId.title }}</h3>
+                <p class="text-sm text-gray-600 mt-1">
+                  Score: {{ result.score }}/{{ result.totalMarks }} ({{ result.percentage }}%)
+                </p>
+              </div>
+              <span [class]="result.passed ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                    class="px-4 py-2 rounded-lg text-sm font-semibold">
+                {{ result.passed ? '✅ Passed' : '❌ Failed' }}
+              </span>
+            </div>
+          </div>
+        } @empty {
+          <div class="text-center py-12">
+            <span class="text-6xl mb-4 block">📋</span>
+            <p class="text-gray-500">No quiz attempts yet</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

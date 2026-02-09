@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-4xl mx-auto px-4">
+    @if (quiz && !submitted()) {
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-3xl font-bold">{{ quiz.title }}</h1>
+          <div class="text-xl font-semibold text-primary">
+            Time: {{ formatTime(timeLeft()) }}
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <div class="flex justify-between text-sm text-gray-600 mb-2">
+            <span>Question {{ currentQuestion() + 1 }} of {{ questions.length }}</span>
+            <span>{{ quiz.duration }} minutes total</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-primary h-2 rounded-full transition-all" 
+                 [style.width.%]="((currentQuestion() + 1) / questions.length) * 100"></div>
+          </div>
+        </div>
+
+        @if (questions[currentQuestion()]; as question) {
+          <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">{{ question.question }}</h2>
+            <div class="space-y-3">
+              @for (option of question.options; track $index) {
+                <button (click)="selectAnswer($index)"
+                        [class.bg-primary]="answers()[currentQuestion()] === $index"
+                        [class.text-white]="answers()[currentQuestion()] === $index"
+                        class="w-full text-left p-4 border rounded-lg hover:bg-gray-50 transition">
+                  {{ option }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="flex justify-between">
+          <button (click)="previousQuestion()" [disabled]="currentQuestion() === 0"
+                  class="px-6 py-2 border rounded hover:bg-gray-50 disabled:opacity-50">
+            Previous
+          </button>
+          @if (currentQuestion() < questions.length - 1) {
+            <button (click)="nextQuestion()"
+                    class="px-6 py-2 bg-primary text-white rounded hover:bg-indigo-700">
+              Next
+            </button>
+          } @else {
+            <button (click)="submitQuiz()"
+                    class="px-6 py-2 bg-secondary text-white rounded hover:bg-green-600">
+              Submit Quiz
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    @if (submitted() && result) {
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <h2 class="text-3xl font-bold mb-4">Quiz Completed!</h2>
+        <div class="text-6xl mb-4">
+          {{ result.passed ? '🎉' : '📚' }}
+        </div>
+        <p class="text-2xl mb-2">Score: {{ result.score }}/{{ result.totalMarks }}</p>
+        <p class="text-xl mb-6">Percentage: {{ result.percentage }}%</p>
+        <p [class]="result.passed ? 'text-green-600' : 'text-red-600'" 
+           class="text-xl font-semibold mb-8">
+          {{ result.passed ? 'Passed!' : 'Keep practicing!' }}
+        </p>
+        <button (click)="router.navigate(['/dashboard'])"
+                class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-indigo-700">
+          Back to Dashboard
+        </button>
+      </div>
+    }
+  </div>
+</div>

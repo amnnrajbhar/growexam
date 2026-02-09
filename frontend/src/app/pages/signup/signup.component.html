@@ -1,0 +1,107 @@
+<div class="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-white via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8">
+    <div class="w-full max-w-md animate-fade-in-up">
+      <div class="mb-8 sm:mb-12">
+        <a href="/" class="flex items-center gap-3 group">
+          <img src="assets/img/logo.svg" alt="GrowExam" class="h-10 w-10 dark:hidden transition-transform group-hover:scale-110">
+          <img src="assets/img/logo-dark.svg" alt="GrowExam" class="h-10 w-10 hidden dark:block transition-transform group-hover:scale-110">
+          <span class="text-xl font-bold gradient-text">GrowExam</span>
+        </a>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-2">Create your account</h1>
+      <p class="text-slate-600 dark:text-slate-400 mb-8 text-base">Start your exam preparation journey today</p>
+
+      @if (error) {
+        <div class="glass-md bg-red-50/50 dark:bg-red-900/20 border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl mb-6 text-sm animate-slide-in-down">
+          {{ error }}
+        </div>
+      }
+
+      <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="space-y-5">
+        <div>
+          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Full Name</label>
+          <input 
+            type="text" 
+            [(ngModel)]="name" 
+            name="name" 
+            required
+            placeholder="Enter your full name"
+            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
+        </div>
+
+        <div>
+          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Email Address</label>
+          <input 
+            type="email" 
+            [(ngModel)]="email" 
+            name="email" 
+            required
+            placeholder="Enter your email"
+            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
+        </div>
+
+        <div>
+          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Password</label>
+          <input 
+            type="password" 
+            [(ngModel)]="password" 
+            name="password" 
+            required
+            placeholder="Create a strong password"
+            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Min. 8 characters recommended</p>
+        </div>
+
+        <button 
+          type="submit" 
+          [disabled]="!signupForm.valid || loading"
+          class="w-full btn-glass-primary py-3.5 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ loading ? 'Creating Account...' : 'Sign Up Free' }}
+        </button>
+      </form>
+
+      <p class="text-center mt-6 text-slate-600 dark:text-slate-400 text-sm">
+        Already have an account? 
+        <a routerLink="/login" class="text-teal-600 dark:text-cyan-400 hover:underline font-semibold">Log in</a>
+      </p>
+
+      <p class="text-center mt-4 text-xs text-slate-500 dark:text-slate-400">
+        By signing up, you agree to our Terms of Service and Privacy Policy
+      </p>
+    </div>
+  </div>
+
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-teal-600 to-cyan-700 dark:from-teal-900/40 dark:to-cyan-900/40 items-center justify-center p-8 xl:p-12 relative overflow-hidden">
+    <div class="absolute top-20 right-10 w-96 h-96 bg-white/10 dark:bg-white/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-72 h-72 bg-cyan-400/10 dark:bg-cyan-400/5 rounded-full blur-3xl"></div>
+
+    <div class="relative z-10 text-center text-white max-w-lg">
+      <div class="mb-8">
+        <div class="inline-block glass-lg p-6 rounded-3xl mb-6">
+          <svg class="w-16 h-16 text-cyan-200" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+      </div>
+      
+      <h2 class="text-4xl xl:text-5xl font-bold mb-4 xl:mb-6">Join India's Leading Exam Prep Platform</h2>
+      <p class="text-cyan-100 text-lg xl:text-xl mb-8 xl:mb-12">Get access to expert courses, mock tests, and personalized study plans</p>
+      
+      <div class="grid grid-cols-3 gap-3 xl:gap-6">
+        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
+          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">250+</div>
+          <div class="text-cyan-100 text-sm xl:text-base font-medium">Expert Courses</div>
+        </div>
+        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
+          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">94%</div>
+          <div class="text-cyan-100 text-sm xl:text-base font-medium">Success Rate</div>
+        </div>
+        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
+          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">150K+</div>
+          <div class="text-cyan-100 text-sm xl:text-base font-medium">Active Students</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
