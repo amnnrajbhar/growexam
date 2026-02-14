@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 
 const app = express();
@@ -22,8 +23,14 @@ app.use('/api/questions', require('./routes/questions'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/users', require('./routes/users'));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'GrowExam API' });
+app.use(express.static(path.join(__dirname, '../frontend/dist/frontend/browser')));
+
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../frontend/dist/frontend/browser/index.html'));
+  } else {
+    res.status(404).json({ message: 'API endpoint not found' });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
