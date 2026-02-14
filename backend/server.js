@@ -9,7 +9,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:4200',
+  origin: ['http://localhost:4200', 'https://growexam.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
