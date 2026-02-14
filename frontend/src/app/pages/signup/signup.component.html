@@ -1,105 +1,131 @@
-<div class="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-white via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
-  <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8">
-    <div class="w-full max-w-md animate-fade-in-up">
-      <div class="mb-8 sm:mb-12">
-        <a href="/" class="flex items-center gap-3 group">
-          <img src="assets/img/logo.svg" alt="GrowExam" class="h-10 w-10 dark:hidden transition-transform group-hover:scale-110">
-          <img src="assets/img/logo-dark.svg" alt="GrowExam" class="h-10 w-10 hidden dark:block transition-transform group-hover:scale-110">
-          <span class="text-xl font-bold gradient-text">GrowExam</span>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-slate-50 to-blue-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 p-4">
+  <div class="w-full max-w-6xl bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+    <!-- Left Side - Form -->
+    <div class="w-full lg:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
+      <div class="mb-8">
+        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-slate-200 dark:border-slate-700 hover:border-indigo-400 transition-all group">
+          <div class="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">G</span>
+          </div>
+          <span class="text-slate-700 dark:text-slate-300 font-semibold">GrowExam</span>
         </a>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-2">Create your account</h1>
-      <p class="text-slate-600 dark:text-slate-400 mb-8 text-base">Start your exam preparation journey today</p>
+      <div class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-2">Create an account</h1>
+        <p class="text-slate-500 dark:text-slate-400">Sign up and get 30 day free trial</p>
+      </div>
 
       @if (error) {
-        <div class="glass-md bg-red-50/50 dark:bg-red-900/20 border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl mb-6 text-sm animate-slide-in-down">
+        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-2xl mb-6 text-sm">
           {{ error }}
         </div>
       }
 
       <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="space-y-5">
         <div>
-          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Full Name</label>
+          <label class="block text-slate-600 dark:text-slate-400 text-sm mb-2">Full name</label>
           <input 
             type="text" 
             [(ngModel)]="name" 
             name="name" 
             required
             placeholder="Enter your full name"
-            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
+            class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-slate-50 placeholder:text-slate-400 focus:outline-none focus:bg-white dark:focus:bg-slate-800 focus:border-indigo-400 transition-all duration-300">
         </div>
 
         <div>
-          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Email Address</label>
+          <label class="block text-slate-600 dark:text-slate-400 text-sm mb-2">Email</label>
           <input 
             type="email" 
             [(ngModel)]="email" 
             name="email" 
             required
-            placeholder="Enter your email"
-            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
+            placeholder="your.email@example.com"
+            class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-slate-50 placeholder:text-slate-400 focus:outline-none focus:bg-white dark:focus:bg-slate-800 focus:border-indigo-400 transition-all duration-300">
         </div>
 
         <div>
-          <label class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Password</label>
+          <label class="block text-slate-600 dark:text-slate-400 text-sm mb-2">Password</label>
           <input 
             type="password" 
             [(ngModel)]="password" 
             name="password" 
             required
             placeholder="Create a strong password"
-            class="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all duration-300">
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Min. 8 characters recommended</p>
+            class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-slate-50 placeholder:text-slate-400 focus:outline-none focus:bg-white dark:focus:bg-slate-800 focus:border-indigo-400 transition-all duration-300">
         </div>
 
         <button 
           type="submit" 
           [disabled]="!signupForm.valid || loading"
-          class="w-full btn-glass-primary py-3.5 disabled:opacity-50 disabled:cursor-not-allowed">
-          {{ loading ? 'Creating Account...' : 'Sign Up Free' }}
+          class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ loading ? 'Creating Account...' : 'Submit' }}
         </button>
       </form>
 
-      <p class="text-center mt-6 text-slate-600 dark:text-slate-400 text-sm">
-        Already have an account? 
-        <a routerLink="/login" class="text-teal-600 dark:text-cyan-400 hover:underline font-semibold">Log in</a>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
+        <span class="text-sm text-slate-500 dark:text-slate-400">or continue with</span>
+        <div class="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-2 gap-4">
+        <button class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <span class="text-slate-700 dark:text-slate-300 font-medium text-sm">Google</span>
+        </button>
+        <button class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          <span class="text-slate-700 dark:text-slate-300 font-medium text-sm">GitHub</span>
+        </button>
+      </div>
+
+      <p class="text-center mt-8 text-sm text-slate-600 dark:text-slate-400">
+        Have any account? 
+        <a routerLink="/login" class="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Sign in</a>
       </p>
 
       <p class="text-center mt-4 text-xs text-slate-500 dark:text-slate-400">
-        By signing up, you agree to our Terms of Service and Privacy Policy
+        <a href="#" class="hover:underline">Terms & Conditions</a>
       </p>
     </div>
-  </div>
 
-  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-teal-600 to-cyan-700 dark:from-teal-900/40 dark:to-cyan-900/40 items-center justify-center p-8 xl:p-12 relative overflow-hidden">
-    <div class="absolute top-20 right-10 w-96 h-96 bg-white/10 dark:bg-white/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 left-10 w-72 h-72 bg-cyan-400/10 dark:bg-cyan-400/5 rounded-full blur-3xl"></div>
-
-    <div class="relative z-10 text-center text-white max-w-lg">
-      <div class="mb-8">
-        <div class="inline-block glass-lg p-6 rounded-3xl mb-6">
-          <svg class="w-16 h-16 text-cyan-200" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-          </svg>
+    <!-- Right Side - Image/Illustration -->
+    <div class="hidden lg:block lg:w-1/2 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 relative overflow-hidden">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="relative h-full flex flex-col items-center justify-center p-12 text-white">
+        <div class="mb-8">
+          <div class="w-24 h-24 bg-white/20 backdrop-blur-lg rounded-3xl flex items-center justify-center shadow-2xl">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
         </div>
-      </div>
-      
-      <h2 class="text-4xl xl:text-5xl font-bold mb-4 xl:mb-6">Join India's Leading Exam Prep Platform</h2>
-      <p class="text-cyan-100 text-lg xl:text-xl mb-8 xl:mb-12">Get access to expert courses, mock tests, and personalized study plans</p>
-      
-      <div class="grid grid-cols-3 gap-3 xl:gap-6">
-        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
-          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">250+</div>
-          <div class="text-cyan-100 text-sm xl:text-base font-medium">Expert Courses</div>
-        </div>
-        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
-          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">94%</div>
-          <div class="text-cyan-100 text-sm xl:text-base font-medium">Success Rate</div>
-        </div>
-        <div class="glass-md rounded-2xl p-4 xl:p-6 border-white/20">
-          <div class="text-3xl xl:text-4xl font-bold text-cyan-200 mb-2 xl:mb-3">150K+</div>
-          <div class="text-cyan-100 text-sm xl:text-base font-medium">Active Students</div>
+        
+        <h2 class="text-4xl font-bold mb-4 text-center">Join India's Leading Platform</h2>
+        <p class="text-lg text-white/90 text-center mb-8 max-w-md">Get access to expert courses, mock tests, and personalized study plans</p>
+        
+        <div class="grid grid-cols-3 gap-4 w-full max-w-md">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/20">
+            <div class="text-3xl font-bold mb-1">250+</div>
+            <div class="text-sm text-white/80">Courses</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/20">
+            <div class="text-3xl font-bold mb-1">94%</div>
+            <div class="text-sm text-white/80">Success</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/20">
+            <div class="text-3xl font-bold mb-1">150K+</div>
+            <div class="text-sm text-white/80">Students</div>
+          </div>
         </div>
       </div>
     </div>

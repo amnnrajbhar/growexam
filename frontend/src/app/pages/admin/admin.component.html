@@ -1,94 +1,100 @@
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
   <div class="max-w-7xl mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">Admin Panel</h1>
+    <div class="mb-8 animate-fade-in-up">
+      <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">🔧 Admin Panel</h1>
+      <p class="text-slate-600 dark:text-slate-400">Manage courses, users, and platform content</p>
+    </div>
 
     @if (dashboard) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-gray-600 mb-2">Total Students</h3>
-          <p class="text-3xl font-bold text-primary">{{ dashboard.totalStudents }}</p>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 border-2 border-indigo-200 dark:border-indigo-900/50 hover:scale-105 transition-all">
+          <h3 class="text-slate-600 dark:text-slate-400 mb-2 font-medium text-sm">👥 Total Students</h3>
+          <p class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{{ dashboard.totalStudents }}</p>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-gray-600 mb-2">Total Courses</h3>
-          <p class="text-3xl font-bold text-secondary">{{ dashboard.totalCourses }}</p>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 border-2 border-green-200 dark:border-green-900/50 hover:scale-105 transition-all">
+          <h3 class="text-slate-600 dark:text-slate-400 mb-2 font-medium text-sm">📚 Total Courses</h3>
+          <p class="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{{ dashboard.totalCourses }}</p>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-gray-600 mb-2">Total Enrollments</h3>
-          <p class="text-3xl font-bold text-indigo-600">{{ dashboard.totalEnrollments }}</p>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 border-2 border-blue-200 dark:border-blue-900/50 hover:scale-105 transition-all">
+          <h3 class="text-slate-600 dark:text-slate-400 mb-2 font-medium text-sm">🎓 Total Enrollments</h3>
+          <p class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{{ dashboard.totalEnrollments }}</p>
         </div>
       </div>
     }
 
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold">Manage Courses</h2>
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 mb-8 border border-slate-200 dark:border-slate-700">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">📚 Manage Courses</h2>
         <button (click)="showCourseForm = !showCourseForm"
-                class="bg-primary text-white px-4 py-2 rounded hover:bg-indigo-700">
-          {{ showCourseForm ? 'Cancel' : 'Add Course' }}
+                class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2.5 rounded-xl hover:from-indigo-700 hover:to-purple-700 font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all">
+          {{ showCourseForm ? '❌ Cancel' : '➕ Add Course' }}
         </button>
       </div>
 
       @if (showCourseForm) {
-        <form (ngSubmit)="saveCourse()" class="mb-6 p-4 border rounded">
+        <form (ngSubmit)="saveCourse()" class="mb-6 p-6 border-2 border-indigo-200 dark:border-indigo-900/50 rounded-2xl bg-slate-50 dark:bg-slate-900/50">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-gray-700 mb-2">Title</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Title</label>
               <input type="text" [(ngModel)]="courseForm.title" name="title" required
-                     class="w-full px-3 py-2 border rounded">
+                     class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
             </div>
             <div>
-              <label class="block text-gray-700 mb-2">Category</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Category</label>
               <input type="text" [(ngModel)]="courseForm.category" name="category" required
-                     class="w-full px-3 py-2 border rounded">
+                     class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
             </div>
             <div>
-              <label class="block text-gray-700 mb-2">Instructor</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Instructor</label>
               <input type="text" [(ngModel)]="courseForm.instructor" name="instructor" required
-                     class="w-full px-3 py-2 border rounded">
+                     class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
             </div>
             <div>
-              <label class="block text-gray-700 mb-2">Duration</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Duration</label>
               <input type="text" [(ngModel)]="courseForm.duration" name="duration" required
-                     class="w-full px-3 py-2 border rounded">
+                     class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
             </div>
             <div>
-              <label class="block text-gray-700 mb-2">Level</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Level</label>
               <select [(ngModel)]="courseForm.level" name="level" required
-                      class="w-full px-3 py-2 border rounded">
+                      class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="advanced">Advanced</option>
               </select>
             </div>
             <div>
-              <label class="block text-gray-700 mb-2">Thumbnail URL</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Thumbnail URL</label>
               <input type="text" [(ngModel)]="courseForm.thumbnail" name="thumbnail"
-                     class="w-full px-3 py-2 border rounded">
+                     class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all">
             </div>
             <div class="md:col-span-2">
-              <label class="block text-gray-700 mb-2">Description</label>
+              <label class="block text-slate-700 dark:text-slate-300 mb-2 font-semibold text-sm">Description</label>
               <textarea [(ngModel)]="courseForm.description" name="description" required
-                        class="w-full px-3 py-2 border rounded" rows="3"></textarea>
+                        class="w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-400 transition-all" rows="3"></textarea>
             </div>
           </div>
-          <button type="submit" class="mt-4 bg-secondary text-white px-6 py-2 rounded hover:bg-green-600">
-            Save Course
+          <button type="submit" class="mt-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-xl hover:from-green-600 hover:to-emerald-700 font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all">
+            ✔️ Save Course
           </button>
         </form>
       }
 
-      <div class="space-y-4">
+      <div class="space-y-3">
         @for (course of courses; track course._id) {
-          <div class="border rounded p-4 flex justify-between items-center">
+          <div class="border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-5 flex justify-between items-center hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-lg transition-all">
             <div>
-              <h3 class="font-semibold">{{ course.title }}</h3>
-              <p class="text-sm text-gray-600">{{ course.category }} • {{ course.level }}</p>
+              <h3 class="font-bold text-slate-900 dark:text-white text-lg">{{ course.title }}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                <span class="inline-block bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-lg font-medium mr-2">{{ course.category }}</span>
+                <span class="capitalize">{{ course.level }}</span>
+              </p>
             </div>
-            <div class="space-x-2">
+            <div class="flex gap-3">
               <button (click)="editCourse(course)" 
-                      class="text-blue-600 hover:underline">Edit</button>
+                      class="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-4 py-2 rounded-lg font-semibold transition-all">✏️ Edit</button>
               <button (click)="deleteCourse(course._id)" 
-                      class="text-red-600 hover:underline">Delete</button>
+                      class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 px-4 py-2 rounded-lg font-semibold transition-all">🗑️ Delete</button>
             </div>
           </div>
         }
@@ -96,14 +102,14 @@
     </div>
 
     @if (dashboard?.recentEnrollments) {
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-bold mb-4">Recent Enrollments</h2>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-200 dark:border-slate-700">
+        <h2 class="text-2xl font-bold mb-6 text-slate-900 dark:text-white">🎓 Recent Enrollments</h2>
         <div class="space-y-3">
           @for (enrollment of dashboard.recentEnrollments; track enrollment._id) {
-            <div class="border-b pb-3">
-              <p class="font-semibold">{{ enrollment.userId.name }}</p>
-              <p class="text-sm text-gray-600">{{ enrollment.courseId.title }}</p>
-              <p class="text-xs text-gray-500">{{ enrollment.enrolledAt | date }}</p>
+            <div class="border-b-2 border-slate-200 dark:border-slate-700 pb-4 last:border-0">
+              <p class="font-bold text-slate-900 dark:text-white">👤 {{ enrollment.userId.name }}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">📚 {{ enrollment.courseId.title }}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-500 mt-1">📅 {{ enrollment.enrolledAt | date }}</p>
             </div>
           }
         </div>
