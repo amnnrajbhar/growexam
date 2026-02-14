@@ -56,11 +56,40 @@ import { AuthService } from '../../services/auth.service';
                 Log Out
               </button>
             } @else {
-              <a routerLink="/login" class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium">Log In</a>
-              <a routerLink="/signup" class="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-medium shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">Sign Up</a>
+              <a routerLink="/login" class="hidden sm:inline-block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium">Log In</a>
+              <a routerLink="/signup" class="hidden sm:inline-block px-5 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 rounded-xl transition-all font-medium shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">Sign Up</a>
             }
+
+            <button 
+              (click)="toggleMenu()" 
+              class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+              <svg class="w-6 h-6 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
           </div>
         </div>
+
+        @if (menuOpen) {
+          <div class="md:hidden py-4 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex flex-col space-y-2">
+              <a routerLink="/" (click)="toggleMenu()" routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30" [routerLinkActiveOptions]="{exact: true}" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Home</a>
+              <a routerLink="/courses" (click)="toggleMenu()" routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Courses</a>
+              @if (authService.currentUser()) {
+                <a routerLink="/dashboard" (click)="toggleMenu()" routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Dashboard</a>
+              }
+              @if (authService.isAdmin()) {
+                <a routerLink="/admin" (click)="toggleMenu()" routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Admin</a>
+              }
+              @if (!authService.currentUser()) {
+                <a routerLink="/login" (click)="toggleMenu()" class="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Log In</a>
+                <a routerLink="/signup" (click)="toggleMenu()" class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-slate-900 rounded-xl font-medium text-center">Sign Up</a>
+              } @else {
+                <button (click)="authService.logout(); toggleMenu()" class="px-4 py-2 text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all">Log Out</button>
+              }
+            </div>
+          </div>
+        }
       </div>
     </nav>
   `,
@@ -72,6 +101,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
   isDarkMode = false;
+  menuOpen = false;
 
   constructor(public authService: AuthService) {
     this.isDarkMode = document.documentElement.classList.contains('dark');
@@ -87,5 +117,9 @@ export class NavbarComponent {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 }

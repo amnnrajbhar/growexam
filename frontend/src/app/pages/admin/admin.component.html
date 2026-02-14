@@ -90,11 +90,11 @@
                 <span class="capitalize">{{ course.level }}</span>
               </p>
             </div>
-            <div class="flex gap-3">
+            <div class="flex gap-3 items-center">
               <button (click)="editCourse(course)" 
-                      class="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-4 py-2 rounded-lg font-semibold transition-all">✏️ Edit</button>
+                      class="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-4 py-2 rounded-lg font-semibold transition-all text-sm whitespace-nowrap">✏️ Edit</button>
               <button (click)="deleteCourse(course._id)" 
-                      class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 px-4 py-2 rounded-lg font-semibold transition-all">🗑️ Delete</button>
+                      class="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 px-4 py-2 rounded-lg font-semibold transition-all text-sm whitespace-nowrap">🗑️ Delete</button>
             </div>
           </div>
         }
