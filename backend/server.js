@@ -23,5 +23,9 @@ app.use('/api/questions', require('./routes/questions'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/users', require('./routes/users'));
 
+app.get('/', (req, res) => {
+  res.json({ message: 'GrowExam API is running' });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
